@@ -161,7 +161,7 @@
 #define p_uflags_bit_32(BIT) ((UFlags(32))1 << (unsigned)(BIT))
 #define p_uflags_bit_64(BIT) ((UFlags(64))1 << (unsigned)(BIT))
 
-#if defined(UFLAGS_NO_BUILTINS) && defined(__GNUC__)
+#if !defined(UFLAGS_NO_BUILTINS) && defined(__GNUC__)
 
 #define p_uflags_count_set_8(FLAGS) __builtin_popcount(FLAGS)
 #define p_uflags_count_set_16(FLAGS) __builtin_popcount(FLAGS)
