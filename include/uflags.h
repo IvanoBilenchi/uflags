@@ -67,7 +67,7 @@
  *
  * @public @related UFlags
  */
-#define uflags_bit(N, BIT) ((UFlags(N))((UFlags(N))1 << (UFlags(N))(BIT)))
+#define uflags_bit(N, BIT) P_UFLAGS_MACRO_CONCAT(p_uflags_bit_, N)(BIT)
 
 /**
  * Checks whether a bitmask has specific bits set.
@@ -156,6 +156,11 @@
 #define P_UFLAGS_MACRO_CONCAT(a, b) P_UFLAGS_MACRO_CONCAT_INNER(a, b)
 #define P_UFLAGS_MACRO_CONCAT_INNER(a, b) a##b
 
+#define p_uflags_bit_8(BIT) ((unsigned)1 << (unsigned)(BIT))
+#define p_uflags_bit_16(BIT) ((unsigned)1 << (unsigned)(BIT))
+#define p_uflags_bit_32(BIT) ((UFlags(32))1 << (unsigned)(BIT))
+#define p_uflags_bit_64(BIT) ((UFlags(64))1 << (unsigned)(BIT))
+
 #if defined(UFLAGS_NO_BUILTINS) && defined(__GNUC__)
 
 #define p_uflags_count_set_8(FLAGS) __builtin_popcount(FLAGS)
@@ -171,7 +176,7 @@ static inline unsigned p_uflags_count_set_##N(UFlags(N) flags) {                
     flags = (flags & (UFlags(N))(uflags_all(N) / 15 * 3)) +                                         \
             ((UFlags(N))(flags >> 2U) & (UFlags(N))(uflags_all(N) / 15 * 3));                       \
     flags = (UFlags(N))(flags + (flags >> 4U)) & (UFlags(N))(uflags_all(N) / 255 * 15);             \
-    flags = (UFlags(N))(flags * (uflags_all(N) / 255)) >> (UFlags(N))(N - CHAR_BIT);                \
+    flags = (UFlags(N))(flags * (uflags_all(N) / 255)) >> (UFlags(N))((N) - CHAR_BIT);              \
     return (unsigned)flags;                                                                         \
 }
 
