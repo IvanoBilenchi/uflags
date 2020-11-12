@@ -117,6 +117,19 @@
 #define uflags_unset(N, FLAGS, FLAG) ((FLAGS) &= (UFlags(N))(~(UFlags(N))(FLAG)))
 
 /**
+ * Sets or unsets bits in a bitmask.
+ *
+ * @param N Bitmask size in bits.
+ * @param FLAGS Bitmask.
+ * @param FLAG Bit(s) to set or unset.
+ * @param BOOL True to set, false to unset.
+ *
+ * @public @related UFlags
+ */
+#define uflags_set_bool(N, FLAGS, FLAG, BOOL) \
+    ((BOOL) ? uflags_set(N, FLAGS, FLAG) : uflags_unset(N, FLAGS, FLAG))
+
+/**
  * Toggles bits in a bitmask.
  *
  * @param N Bitmask size in bits.

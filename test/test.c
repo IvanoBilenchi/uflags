@@ -79,6 +79,11 @@
     uflags_unset(N, flags, uflags_bit(N, 1));                                                       \
     uflags_assert(!uflags_is_set(N, flags, uflags_bit(N, 1)));                                      \
                                                                                                     \
+    uflags_set_bool(N, flags, uflags_bit(N, 1), true);                                              \
+    uflags_assert(uflags_is_set(N, flags, uflags_bit(N, 1)));                                       \
+    uflags_set_bool(N, flags, uflags_bit(N, 1), false);                                             \
+    uflags_assert(!uflags_is_set(N, flags, uflags_bit(N, 1)));                                      \
+                                                                                                    \
     uflags_toggle(N, flags, uflags_bit(N, 1));                                                      \
     uflags_assert(uflags_is_set(N, flags, uflags_bit(N, 1)));                                       \
                                                                                                     \
